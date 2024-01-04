@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:gemini_chat_app/chat_manager.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:uuid/uuid.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -17,6 +18,28 @@ class _ChatPageState extends State<ChatPage> {
  
 
   final ChatManager chatManager = ChatManager();
+
+  // @override
+  // void initState() {
+  //  // chatManager.initialWebSocket();
+  //   chatManager.channel.stream.listen((event) { 
+  //     chatManager.onMessageReceived(event);
+  //     setState(() {
+        
+  //     });
+  //     super.initState();
+  //   });
+  // }
+
+  @override
+  void initState() {
+    RxString res = chatManager.result;
+    chatManager.onMessageReceived(res);
+    setState(() {
+      
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
